@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/wineries/bottles")
+@RequestMapping(path = "api/bottles")
 public class BottleController {
 
 
@@ -16,7 +16,7 @@ public class BottleController {
 
         @Autowired
         public BottleController(BottleService bottleService){
-            this.bottleService= this.bottleService;
+            this.bottleService= bottleService;
         }
 
         @GetMapping

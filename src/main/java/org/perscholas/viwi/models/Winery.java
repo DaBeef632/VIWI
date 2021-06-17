@@ -1,21 +1,23 @@
 package org.perscholas.viwi.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
+@Entity(name = "Winery")
 @Table
 public class Winery {
+    @Id
+    @Column(name = "winery_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NonNull
+    private Long wineryId;
+
     private String wineryName;
     private String details;
-    private String region_id
+    private String region_id;
 }

@@ -9,7 +9,7 @@ import java.time.Period;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-@Entity(name = "User")
+@Entity(name = "user")
 @Table( name = "user",
         uniqueConstraints = {
         @UniqueConstraint(name = "user_email_unique", columnNames = "email")

@@ -1,12 +1,17 @@
 package org.perscholas.viwi.models;
 
-import lombok.NonNull;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Entity(name = "Country")
+@Table(name = "country")
 public class Country {
     @Id
     @Column(name = "country_id")
@@ -16,4 +21,11 @@ public class Country {
     @Column(name = "country_name")
     @NonNull
     private String countryName;
+
+    @OneToMany(
+            mappedBy = "country",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL
+    )
+    private List<Region> regions = new ArrayList<>();
 }

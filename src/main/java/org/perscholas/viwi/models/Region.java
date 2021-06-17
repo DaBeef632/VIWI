@@ -3,13 +3,15 @@ package org.perscholas.viwi.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity(name = "Region")
-@Table
+@Table(name = "region")
 public class Region {
 
     @Id
@@ -21,7 +23,21 @@ public class Region {
     @NonNull
     private String regionName;
 
-    @Column(name = "country_id")
-    @NonNull
-    private long countryId;
+    @ManyToOne
+    @JoinColumn(
+            name = "country_id",
+            referencedColumnName = "country_id",
+            foreignKey = @ForeignKey(
+                    name = "country_id_fk"
+            )
+    )
+    private Country country;
+
+    @OneToMany(
+            mappedBy = "region",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL
+    )
+    private List<Winery> wineries = new ArrayList<>();
+
 }

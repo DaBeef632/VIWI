@@ -21,7 +21,16 @@ public class Winery {
 
     private String wineryName;
     private String details;
-    private String region_id;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "region_id",
+            referencedColumnName = "region_id",
+            foreignKey = @ForeignKey(
+                    name = "region_id_fk"
+            )
+    )
+    private Region region;
 
     @OneToMany(
             mappedBy = "winery",
@@ -29,5 +38,6 @@ public class Winery {
             cascade = CascadeType.ALL
     )
     private List<Bottle> bottles = new ArrayList<>();
+
 
 }

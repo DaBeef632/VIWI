@@ -3,13 +3,15 @@ package org.perscholas.viwi.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity(name = "Bottle")
-@Table(name = "bottles")
+@Table(name = "bottle")
 public class Bottle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,9 +22,15 @@ public class Bottle {
     @NonNull
     private String bottleName;
 
-    @Column(name = "type_of_wine")
-    @NonNull
-    private long category_id;
+    @ManyToOne
+    @JoinColumn(
+            name = "wine_type_id",
+            referencedColumnName = "wine_type_id",
+            foreignKey = @ForeignKey(
+                    name = "wine_type_id_fk"
+            )
+    )
+    private WineType winetype;
 
     @Column(name = "label")
     private String label;
@@ -30,8 +38,15 @@ public class Bottle {
     @Column(name = "volume")
     private float volume;
 
-    @Column(name = "producer_id")
-    private long producerId;
+    @ManyToOne
+    @JoinColumn(
+            name = "winery_id",
+            referencedColumnName = "winery_id",
+            foreignKey = @ForeignKey(
+                    name = "winery_id_fk"
+            )
+    )
+    private Winery winery;
 
     @Column(name = "year_produced")
     @NonNull

@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,6 +41,13 @@ public class User {
     @Transient
     private Integer age;
 
+    @OneToMany(
+            mappedBy = "user",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL
+    )
+    private List<Order> orders = new ArrayList<>();
+
     public User(String firstName, String lastName, String email, LocalDate dob) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -49,5 +58,19 @@ public class User {
 
     public Integer getAge(){
         return Period.between(this.dob, LocalDate.now()).getYears();
+    }
+
+    public void addOrder(Order order){
+        if(!this.orders.contains(order)){
+            this.orders.add(order);
+            order.setUser(this);
+        }
+    }
+
+    public void removeOrder(Order order){
+        if (this.orders.contains(order)){
+            this.orders.remove(order);
+            order.setUser(null);
+        }
     }
 }

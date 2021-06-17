@@ -23,7 +23,12 @@ public class User {
 
     @Column(name = "first_name")
     @NonNull
-    private String name;
+    private String firstName;
+
+    @Column(name = "last_name")
+    @NonNull
+    private String lastName;
+
     @Column(name = "email")
     @NonNull
     private String email;
@@ -34,8 +39,9 @@ public class User {
     @Transient
     private Integer age;
 
-    public User(String name, String email, LocalDate dob) {
-        this.name = name;
+    public User(String firstName, String lastName, String email, LocalDate dob) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.dob = dob;
 
